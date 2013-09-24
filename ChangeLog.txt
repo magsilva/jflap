@@ -1,0 +1,68 @@
+Bug Fixes
+Fixed the NFA to DFA conversion bug.
+Fixed the NullPointer that sometimes came up in MultiLineToolTip.
+Fixed Batch Testing bug.
+
+Other Changes
+
+Added zooming To the Editor pane with a horizontal slider.
+
+Added Undo/Redo Functionality to the machine editing panes. These two
+additional tools are used the same as other tools. The tool must be selected,
+and then the user must click inside the canvas to use the tool. Note also that
+the user can set the number of Undos that are available. This number defaults
+to 50.
+
+Removed the extra click when creating transitions - we can now create
+transitions and immediately start typing, rather than the previous behavior
+where we had to click or type a Tab to start entering text.
+
+Added saving to various standard image file formats, as well as SVG,
+using the Batik SVG library. This is available under the File-->Save Image As
+submenu. Standard image formats will work for both grammars and state
+diagrams, while SVG only works for state diagrams.
+
+Added a text size slider for grammars.
+
+Allow more adjusting of table cell widths in grammar editing panes.
+
+Changed appearance of Delete Tool cursor. The cursor now becomes an X
+when the delete tool is selected.
+
+Added parsing of a range of values in transition labels, for DFA. That
+is, if we want a transition on any number between 0 and 9, we no longer need
+to create 9 separate stacked transitions, and can instead type [0-9].
+
+Allow transitions to be manipulated by control point. Now, once a
+transition is created, the user can click once to "select" or "deselect" the
+transition, and click twice to edit the contents. When a transition is
+selected, its control point is made visible, and one can manipulate the
+trannsition by dragging the control point. A transition will remain selected
+until another transition is selected, or it is explicitly de-selected. Also,
+each label on one curve counts as a separate transition, with its own control
+point.
+
+Turing machines have been revamped, with quite a few implications for
+users. First, the distinction between regular Turing Machine states and
+Building Blocks has been eliminated, in appearance and functionality. Any
+Turing Machine state can now become a Building Block, by simply right-clicking
+on it, and clicking "Edit Block." The old way of adding building blocks still
+works as well.
+Turing machines within building blocks have two characteristics. First,
+they must have an initial state; this is enforced during simulation. Second,
+they will ignore any final states and simply look for transitions out of the
+building block when the internal machine halts.
+Additionally, there are new preferences available for Turing machines,
+available from the Preferences menu of JFLAP's starting dialog. The user can
+now choose to Accept by Final State, Accept by Halting, or both. By choosing
+the latter option, the user can make JFLAP's Turing machine behave as a true
+transducer which does not care about the final state.
+Finally, the user can select whether to allow the Stay option on
+transitions. Since JFLAP has traditionally allowed the Stay option, the
+obvious question is, what happens to a JFLAP file that was created with some
+transitions using the Stay option, if the preferences is set to not allow it?
+The answer is arbitrary but unambiguous. If the user does not attempt to edit
+the "illegal" transitions, then they will stay as they are, and function as
+they did. However, if the user clicks on the illegal Stay, it will change to
+R, and the user will not be able to change it back to S unless he sets the
+preference to allow Stay again.

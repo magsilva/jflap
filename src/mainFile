@@ -1,0 +1,2 @@
+Main-Class: JFLAP
+Class-Path: svg.jar JFLAP.jar JFLAP_With_Source.jar
