@@ -14,7 +14,7 @@
  *
  */
 
-
+package automata.turing;
 
 
 //MERLIN MERLIN MERLIN MERLIN MERLIN//

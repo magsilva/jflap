@@ -1,0 +1,169 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.jflap</groupId>
+	<artifactId>jflap</artifactId>
+	<packaging>jar</packaging>
+	<version>7.0</version>
+
+
+	<name>JFLAP</name>
+	<description>JFLAP is a software for experimenting with formal language topics (NFA, NPA, MT, and so on)</description>
+	<url>http://www.jflap.org/</url>
+	<inceptionYear>1990</inceptionYear>
+
+	<licenses>
+		<license>
+			<name>JFLAP 7.0 License</name>
+			<url>http://www.cs.duke.edu/csed/jflap/jflaptmp/aug28-09/license.html</url>
+		</license>
+	</licenses>
+
+        <distributionManagement>
+                <repository>
+                        <id>IroniaCorp</id>
+                        <url>dav:http://www.ironiacorp.com/repo/maven2</url>
+                </repository>
+        </distributionManagement>
+
+
+	<repositories>
+                <repository>
+                        <id>repo1</id>
+                        <url>http://repo1.maven.org/maven2/</url>
+                        <releases>
+                                <enabled>true</enabled>
+                                <updatePolicy>interval:10080</updatePolicy>
+                        </releases>
+                        <snapshots>
+                                <enabled>false</enabled>
+                        </snapshots>
+                </repository>
+
+                <repository>
+                        <id>IroniaCorp</id>
+                        <name>Ironia Corporation</name>
+                        <url>http://www.ironiacorp.com/repo/maven2</url>
+                        <releases>
+                                <enabled>true</enabled>
+                                <updatePolicy>interval:10080</updatePolicy>
+                        </releases>
+                        <snapshots>
+                                <enabled>true</enabled>
+                                <updatePolicy>interval:10080</updatePolicy>
+                        </snapshots>
+                </repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>[4.11,)</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-svggen</artifactId>
+			<version>1.6-1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-swing</artifactId>
+			<version>1.6-1</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}-${project.version}</finalName>
+		<directory>target</directory>
+
+		<sourceDirectory>${project.basedir}/src</sourceDirectory>
+		<testSourceDirectory>${project.basedir}/test</testSourceDirectory>
+
+		<outputDirectory>${project.build.directory}/classes</outputDirectory>
+		<testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
+
+                <resources>
+                        <resource>
+                                <directory>${project.basedir}/resources</directory>
+                                <filtering>false</filtering>
+                        </resource>
+                </resources>
+
+                <testResources>
+                        <testResource>
+                                <directory>${project.basedir}/test-resources</directory>
+                                <filtering>false</filtering>
+                        </testResource>
+                </testResources>
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav-jackrabbit</artifactId>
+				<version>2.4</version>
+			</extension>
+
+			<extension>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-nop</artifactId>
+				<version>1.6.6</version>
+			</extension>
+		</extensions>
+
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<fork>true</fork>
+					<meminitial>128m</meminitial>
+					<maxmem>512m</maxmem>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<classesDirectory>${project.build.outputDirectory}</classesDirectory>
+					<outputDirectory>${project.build.directory}</outputDirectory>
+					<archive>
+						<index>true</index>
+						<manifest>
+							<mainClass>gui.Main</mainClass>
+							<packageName>jabref</packageName>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib</classpathPrefix>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptors>
+						<descriptor>assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+			        <executions>
+					<execution>
+						<phase>package</phase>
+			            		<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
