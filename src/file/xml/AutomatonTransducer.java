@@ -591,6 +591,7 @@ public abstract class AutomatonTransducer extends AbstractTransducer {
 				+ block.getPoint().getX()));
 		be.appendChild(createElement(document, STATE_Y_COORD_NAME, null, ""
 				+ block.getPoint().getY()));
+		be.appendChild(createElement(document, STATE_LABEL_NAME, null, block.getLabel()));
 		// Encode whether the block is initial.
 //		State parent = block.getParentBlock();
 //		Automaton a = null;
